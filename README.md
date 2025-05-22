@@ -1,32 +1,26 @@
 # Improving Covalent and Non-Covalent Molecule Generation via Reinforcement Learning with Functional Fragments
 
-## 📝 Abstract
+## Abstract
 
-<!-- Paste your paper's abstract below -->
-*To be added by the author...*
+Small-molecule drugs play a critical role in cancer therapy by selectively targeting key signaling pathways that drive tumor growth. While deep learning models have advanced drug discovery, there remains a lack of generative frameworks for \textit{de novo} covalent molecule design using a fragment-based approach. To address this, we propose MOFF (MOlecule generation with Functional Fragments), a reinforcement learning framework for molecule generation. MOFF is specifically designed to generate both covalent and non-covalent compounds based on functional fragments. The model leverages docking scores as reward function and is trained using the Soft Actor-Critic algorithm. We evaluate MOFF through case studies targeting Bruton's tyrosine kinase (BTK) and the epidermal growth factor receptor (EGFR), demonstrating that MOFF can generate ligand-like molecules with favorable docking scores and drug-like properties, compared to baseline models and ChEMBL compounds. As a computational validation, molecular dynamics (MD) simulations were conducted on selected top-scoring molecules to assess potential binding stability. These results highlight MOFF as a flexible and extensible framework for fragment-based molecule generation, with the potential to support downstream applications.
 
 ---
 
-## 🧪 Environment Setup
+## Environment Setup
 
 Install required dependencies using the provided `environment.yml` file:
 
 ```bash
 conda env create -f environment.yml
 conda activate molecule-rl
-This project also requires AutoDock-GPU for docking. Follow the AutoDock-GPU installation guide to compile it. Once built, add the binary to your PATH:
+```
+This project also requires AutoDock-GPU for docking. Follow the [AutoDock-GPU installation guide](https://github.com/ccsb-scripps/AutoDock-GPU/wiki/Guideline-for-users) to compile it. Once built, add the binary to the `./bin` directory.
 
-bash
-复制
-编辑
-export PATH="bin:$PATH"
-🚀 Running Molecular Generation
+## Running Molecular Generation
 We provide two example shell scripts for covalent and non-covalent molecule generation using reinforcement learning guided by docking scores.
 
-🔗 Covalent Generation
-bash
-复制
-编辑
+`run_cov.sh` for covalent molecule generation targeting BTK:
+```bash
 export PATH="bin:$PATH"  # for docking use
 
 CUDA_LAUNCH_BLOCKING=1 python3 run_rl.py \
@@ -47,10 +41,10 @@ CUDA_LAUNCH_BLOCKING=1 python3 run_rl.py \
     --receptor_pdb='gym_molecule/maps_file/5p9j/5p9j.pdb' \
     --covlent_amino_acid='A:CYS:481' \
     --receptor_maps='gym_molecule/maps_file/5p9j/5p9j_rigid.maps.fld'
-🔗 Non-Covalent Generation
-bash
-复制
-编辑
+```
+
+`run_noncov.sh` for non-covalent molecule generation targeting BTK:
+```bash
 export PATH="bin:$PATH"  # for docking use
 
 CUDA_LAUNCH_BLOCKING=1 python3 run_rl.py \
@@ -69,52 +63,33 @@ CUDA_LAUNCH_BLOCKING=1 python3 run_rl.py \
     --munchausen=1 --alpha_min=0.1 --init_alpha_lr=5e-4 \
     --step_list 0 2 1 2 \
     --receptor_maps='gym_molecule/maps_file/6e4f/6e4f_protein.maps.fld'
-📂 Receptor Map Files
-You can use the following receptor .maps.fld files:
+```
 
-Target	Covalent	Non-Covalent
-BTK	gym_molecule/maps_file/5p9j/5p9j_rigid.maps.fld	—
-EGFR	—	gym_molecule/maps_file/6e4f/6e4f_protein.maps.fld
 
-For covalent generation, ensure you also provide:
-
-The .pdb file: --receptor_pdb='...'
-
-The covalent binding residue: --covlent_amino_acid='A:CYS:481'
-
-🧩 Customize Fragments and Construction Logic
+## Customize Fragments and Other Protein Targets
 Fragments used to build molecules are stored in:
-
-bash
-复制
-编辑
-MOFF/gym_molecule/dataset/*.txt
+```
+./gym_molecule/dataset/*.txt
+```
 Each text file corresponds to a functional group type (e.g., warhead, linker, etc.).
 
 You can change the build logic using:
 
-bash
-复制
-编辑
+```
 --step_list 0 2 1 2
+```
+
 This represents the order in which fragment types are assembled during molecule generation. The numbers correspond to indices of your custom fragment categories.
 
-🧬 Extend to Other Protein Targets
-To apply this framework to new proteins:
 
-Prepare your receptor .pdb and generate docking .maps.fld files.
+To apply this framework to **new proteins**:
 
-Follow AutoDock-Vina or AutoDock-GPU documentation:
+1. Prepare your receptor .pdb and generate docking .maps.fld files.
 
-Basic docking
+2. Follow AutoDock-Vina or AutoDock-GPU documentation:
 
-Flexible docking
+ * [Basic docking](https://autodock-vina.readthedocs.io/en/latest/docking_basic.html)
 
-Replace --receptor_pdb, --receptor_maps, and optionally --covlent_amino_acid in the script.
+ * [Covalent docking](https://autodock-vina.readthedocs.io/en/latest/docking_flexible.html)
 
-📫 Contact
-For any questions, feel free to reach out:
-
-📧 Yongrui Wang: wangyongrui20@mails.ucas.ac.cn
-
-📧 Xiaolin Li: xiaolinli@ieee.org
+3. Replace `--receptor_maps`, and optionally `--receptor_pdb`, `--covlent_amino_acid` in the script.

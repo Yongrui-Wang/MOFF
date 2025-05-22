@@ -19,7 +19,8 @@ This project also requires AutoDock-GPU for docking. Follow the [AutoDock-GPU in
 ## Running Molecular Generation
 We provide two example shell scripts for covalent and non-covalent molecule generation using reinforcement learning guided by docking scores.
 
-`run_cov.sh` for covalent molecule generation targeting BTK:
+### Covalent Molecule Generation (Target: BTK):
+Save as `run_cov.sh`:
 ```bash
 export PATH="bin:$PATH"  # for docking use
 
@@ -43,7 +44,8 @@ CUDA_LAUNCH_BLOCKING=1 python3 run_rl.py \
     --receptor_maps='gym_molecule/maps_file/5p9j/5p9j_rigid.maps.fld'
 ```
 
-`run_noncov.sh` for non-covalent molecule generation targeting BTK:
+### Non-Covalent Molecule Generation (Target: BTK)
+Save as `run_noncov.sh`:
 ```bash
 export PATH="bin:$PATH"  # for docking use
 
@@ -64,9 +66,20 @@ CUDA_LAUNCH_BLOCKING=1 python3 run_rl.py \
     --step_list 0 2 1 2 \
     --receptor_maps='gym_molecule/maps_file/6e4f/6e4f_protein.maps.fld'
 ```
+### Run with EGFR Target
+covalent:
+```
+--receptor_pdb='gym_molecule/maps_file/2j5f_cov/2j5f_protein.pdb' \
+--covlent_amino_acid='A:CYS:797' \
+--receptor_maps='gym_molecule/maps_file/2j5f_cov/2j5f_protein_rigid.maps.fld'
+```
+non-covalent:
+```
+--receptor_maps='gym_molecule/maps_file/2j5f/2j5f_protein.maps.fld'
+```
 
 
-## Customize Fragments and Other Protein Targets
+## Extendibility
 Fragments used to build molecules are stored in:
 ```
 ./gym_molecule/dataset/*.txt
@@ -82,14 +95,14 @@ You can change the build logic using:
 This represents the order in which fragment types are assembled during molecule generation. The numbers correspond to indices of your custom fragment categories.
 
 
-To apply this framework to **new proteins**:
+Extend to **new protein receptors**:
 
 1. Prepare your receptor .pdb and generate docking .maps.fld files.
 
 2. Follow AutoDock-Vina or AutoDock-GPU documentation:
 
- * [Basic docking](https://autodock-vina.readthedocs.io/en/latest/docking_basic.html)
+    * [Basic docking](https://autodock-vina.readthedocs.io/en/latest/docking_basic.html)
 
- * [Covalent docking](https://autodock-vina.readthedocs.io/en/latest/docking_flexible.html)
+    * [Covalent docking](https://autodock-vina.readthedocs.io/en/latest/docking_flexible.html)
 
 3. Replace `--receptor_maps`, and optionally `--receptor_pdb`, `--covlent_amino_acid` in the script.

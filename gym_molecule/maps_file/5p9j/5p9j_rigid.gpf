@@ -1,0 +1,25 @@
+npts 59 69 67
+gridfld 5p9j_rigid.maps.fld
+spacing 0.375
+receptor_types A C HD N NA OA SA
+ligand_types HD C A N NA OA F P SA S Cl Br I H
+receptor 5p9j_rigid.pdbqt
+gridcenter 23.503 16.453 -3.849
+smooth 0.5
+map         5p9j_rigid.HD.map
+map         5p9j_rigid.C.map
+map         5p9j_rigid.A.map
+map         5p9j_rigid.N.map
+map         5p9j_rigid.NA.map
+map         5p9j_rigid.OA.map
+map         5p9j_rigid.F.map
+map         5p9j_rigid.P.map
+map         5p9j_rigid.SA.map
+map         5p9j_rigid.S.map
+map         5p9j_rigid.Cl.map
+map         5p9j_rigid.Br.map
+map         5p9j_rigid.I.map
+map         5p9j_rigid.H.map
+elecmap     5p9j_rigid.e.map
+dsolvmap    5p9j_rigid.d.map
+dielectric -0.1465

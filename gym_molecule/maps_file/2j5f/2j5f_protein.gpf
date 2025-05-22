@@ -1,0 +1,24 @@
+npts 52 52 52
+gridfld 2j5f_protein.maps.fld
+spacing 0.375
+receptor_types A C HD N NA OA SA
+ligand_types HD C A N NA OA F P SA S Cl Br I
+receptor recepter_files/2j5f_protein.pdbqt
+gridcenter -52.770 -0.860 -23.450
+smooth 0.5
+map         2j5f_protein.HD.map
+map         2j5f_protein.C.map
+map         2j5f_protein.A.map
+map         2j5f_protein.N.map
+map         2j5f_protein.NA.map
+map         2j5f_protein.OA.map
+map         2j5f_protein.F.map
+map         2j5f_protein.P.map
+map         2j5f_protein.SA.map
+map         2j5f_protein.S.map
+map         2j5f_protein.Cl.map
+map         2j5f_protein.Br.map
+map         2j5f_protein.I.map
+elecmap     2j5f_protein.e.map
+dsolvmap    2j5f_protein.d.map
+dielectric -0.1465

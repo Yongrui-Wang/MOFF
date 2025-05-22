@@ -1,0 +1,24 @@
+npts 42 28 52
+gridfld 6e4f_protein.maps.fld
+spacing 0.375
+receptor_types A C HD N NA OA SA
+ligand_types HD C A N NA OA F P SA S Cl Br I
+receptor 6e4f_protein.pdbqt
+gridcenter 21.150 6.700 4.130
+smooth 0.5
+map         6e4f_protein.HD.map
+map         6e4f_protein.C.map
+map         6e4f_protein.A.map
+map         6e4f_protein.N.map
+map         6e4f_protein.NA.map
+map         6e4f_protein.OA.map
+map         6e4f_protein.F.map
+map         6e4f_protein.P.map
+map         6e4f_protein.SA.map
+map         6e4f_protein.S.map
+map         6e4f_protein.Cl.map
+map         6e4f_protein.Br.map
+map         6e4f_protein.I.map
+elecmap     6e4f_protein.e.map
+dsolvmap    6e4f_protein.d.map
+dielectric -0.1465

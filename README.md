@@ -12,7 +12,7 @@ Install required dependencies using the provided `environment.yml` file:
 
 ```bash
 conda env create -f environment.yml
-conda activate molecule-rl
+conda activate moff
 ```
 This project also requires AutoDock-GPU for docking. Follow the [AutoDock-GPU installation guide](https://github.com/ccsb-scripps/AutoDock-GPU/wiki/Guideline-for-users) to compile it. Once built, add the binary to the `./bin` directory.
 
